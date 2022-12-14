@@ -1,0 +1,45 @@
+#board {
+    margin-top: 7vh;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.square {
+    width: 4vh;
+    height: 4vh;
+    background-color: black;
+    margin: 0.1vh;
+}
+
+#gameOver {
+    display: none;
+}
+
+#gameOverText {
+    text-align: center;
+    margin-top: 28vh;
+    font-size: 10vh;
+}
+
+#scoreOver {
+    text-align: center;
+    font-size: 5vh;
+    margin-top: -7.5vh;
+}
+
+#playAgain {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40vw;
+    height: 10vh;
+    border-radius: 1000px;
+    cursor: pointer;
+}
