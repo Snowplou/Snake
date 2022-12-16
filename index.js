@@ -1,6 +1,7 @@
 // Create game variables
 let board = []
 let boardSize = 20
+let snakeStartingSize = 6 /* Must be even number */
 let score = 0
 let grow = 0;
 let directionChanged = false
@@ -14,7 +15,7 @@ for (let i = 0; i < boardSize; i++) {
     board.push([])
     for (let j = 0; j < boardSize; j++) {
         let square = document.createElement("div")
-        square.id = "square " + j + " " + (19 - i)
+        square.id = "square " + j + " " + (boardSize - 1 - i)
         square.className = "square"
         row.appendChild(square)
         board[i].push("empty")
@@ -44,7 +45,11 @@ addEventListener("keydown", function (event) {
 })
 
 // Intitalize snake and food
-let snake = [[6, 10], [7, 10], [8, 10], [9, 10], [10, 10], [11, 10]]
+// let snake = [[6, 10], [7, 10], [8, 10], [9, 10], [10, 10], [11, 10]]
+let snake = []
+for(let i = 0; i < snakeStartingSize; i++){
+    snake.push([boardSize / 2 + (i - (snakeStartingSize / 2)), boardSize / 2])
+}
 let food = []
 displaySnake()
 placeFood()
@@ -92,6 +97,7 @@ let runningGame = setInterval(function(){
 
     if(snake[snake.length - 1][0] == food[0] && snake[snake.length - 1][1] == food[1]){
         score++
+        document.getElementById("scoreDisplay").innerText = "Score: " + score
         placeFood()
         grow += 3
     }
@@ -101,19 +107,22 @@ let runningGame = setInterval(function(){
 function displaySnake(){
     for(let coord in snake){
 
-        let red = coord / (snake.length - 1) * 255
-        let blue = 255 - red
+        // let red = coord / (snake.length - 1) * 255
+        // let blue = 255 - red
+        let red = 255
+        let blue = 0
 
         document.getElementById("square " + snake[coord][0] + " " + snake[coord][1]).style.backgroundColor = "rgb(" + red + ",0," + blue + ")"
     }
 }
 
 function placeFood(){
-    let x = Math.round(Math.random() * 19)
-    let y = Math.round(Math.random() * 19)
+    let x = Math.round(Math.random() * (boardSize - 1))
+    let y = Math.round(Math.random() * (boardSize - 1))
     for(let i = 0; i < snake.length - 1; i++){
         if(snake[i][0] == x && snake[i][1] == y){
             placeFood()
+            return
         }
         else{
             food[0] = x
@@ -127,6 +136,8 @@ function gameOver(square){
 
     let cycleTime = 750
     let cycles = 3
+
+    document.getElementById("scoreOver").innerText = "Score: " + score
 
     clearInterval(runningGame)
     for(let i = 1; i <= 2 * cycles; i++){

@@ -1,5 +1,5 @@
 #board {
-    margin-top: 7vh;
+    margin-top: 3vh;
 }
 
 .row {
@@ -15,7 +15,14 @@
     width: 4vh;
     height: 4vh;
     background-color: black;
-    margin: 0.1vh;
+    /* margin: 0.1vh; */
+    margin: 0vh;
+}
+
+#scoreDisplay {
+    text-align: center;
+    font-size: 4vh;
+    margin: 2vh;
 }
 
 #gameOver {
